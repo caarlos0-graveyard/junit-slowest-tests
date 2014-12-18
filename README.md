@@ -1,4 +1,4 @@
-junit-slowest-tests
+junit-slowest-tests [![Build Status](https://travis-ci.org/caarlos0/junit-slowest-tests.svg?branch=master)](https://travis-ci.org/caarlos0/junit-slowest-tests)
 ===================
 
 After the build, you can use this scripts to discover the slowest tests
