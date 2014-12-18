@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Find the 50 slowest tests in your maven project.
+#
+main() {
+  grep -h "<testcase" "$(find "$@" -iname "TEST-*.xml")" | \
+    sed 's/<testcase time="\(.*\)" classname="\(.*\)" name="\(.*\)".*/\1 \2#\3/' | \
+    sort -rn | head -n 50
+}
+
+main "$@"

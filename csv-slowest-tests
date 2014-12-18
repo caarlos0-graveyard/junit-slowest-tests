@@ -1,0 +1,9 @@
+#!/bin/bash
+#
+# Find the 50 slowest tests in your maven project and prints them as a CSV file
+#
+main() {
+  "$(dirname "$0")"/slowest_tests.sh "$*" | sed 's/  //g' | sed 's/ /,/g'
+}
+
+main "$@"
