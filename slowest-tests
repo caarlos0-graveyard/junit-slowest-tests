@@ -6,7 +6,9 @@ set -eo pipefail
 [[ "${DEBUG:-}" ]] && set -x
 
 main() {
-  grep -h "<testcase" "$(find "$@" -iname "TEST-*.xml")" | \
+  local folder="$*"
+  [[ -z "$folder" ]] && folder="."
+  grep -h "<testcase" "$(find "$folder" -iname "TEST-*.xml")" | \
     sed 's/<testcase time="\(.*\)" classname="\(.*\)" name="\(.*\)".*/\1 \2#\3/' | \
     sort -rn | head -n 50
 }
