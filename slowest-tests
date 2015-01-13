@@ -5,7 +5,7 @@
 set -eo pipefail
 [[ "${DEBUG:-}" ]] && set -x
 
-main() {
+extract() {
   local folder="$*"
   [[ -z "$folder" ]] && folder="."
   find "$folder" -iname "TEST-*.xml" | while read file; do
@@ -13,6 +13,19 @@ main() {
         -e 's/<testcase time="\(.*\)" classname="\(.*\)" name="\(.*\)".*/\1 \2#\3/'  \
         -e 's/<testcase name="\(.*\)" classname="\(.*\)" time="\(.*\)".*/\3 \2#\1/'
   done | sort -rn | head -n 50 | sed 's/  //g'
+}
+
+csv() {
+  sed 's/ /,/g'
+}
+
+main() {
+  if [[ "$1" = "-csv" ]]; then
+    shift
+    extract "$@" | csv
+  else
+    extract "$@"
+  fi
 }
 
 main "$@"
