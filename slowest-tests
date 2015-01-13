@@ -12,7 +12,7 @@ main() {
     grep -h "<testcase" "$file" | sed \
         -e 's/<testcase time="\(.*\)" classname="\(.*\)" name="\(.*\)".*/\1 \2#\3/'  \
         -e 's/<testcase name="\(.*\)" classname="\(.*\)" time="\(.*\)".*/\3 \2#\1/'
-  done | sort -rn | head -n 50
+  done | sort -rn | head -n 50 | sed 's/  //g'
 }
 
 main "$@"

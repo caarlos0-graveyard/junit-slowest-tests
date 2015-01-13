@@ -6,7 +6,7 @@ set -eo pipefail
 [[ "${DEBUG:-}" ]] && set -x
 
 main() {
-  "$(dirname "$0")"/slowest-tests "$*" | sed 's/  //g' | sed 's/ /,/g'
+  "$(dirname "$0")"/slowest-tests "$*" | sed 's/ /,/g'
 }
 
 main "$@"
