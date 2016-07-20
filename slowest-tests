@@ -7,8 +7,7 @@ set -eo pipefail
 
 extract() {
   local folder="$*"
-  [[ -z "$folder" ]] && folder="."
-  find "$folder" -iname "TEST-*.xml" | while read -r file; do
+  find "${folder:-.}" -iname "TEST-*.xml" | while read -r file; do
     grep -h "<testcase" "$file" | sed \
         -e 's/<testcase time="\(.*\)" classname="\(.*\)" name="\(.*\)".*/\1 \2#\3/'  \
         -e 's/<testcase name="\(.*\)" classname="\(.*\)" time="\(.*\)".*/\3 \2#\1/'
